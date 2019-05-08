@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+
+
+	<!-- <bean id="triangle" class="com.gaurav.springmvc.Triangle">
+		<property name="pointA" ref="pointA" />
+		<property name="pointB" ref="pointB" />
+		<property name="pointC" ref="pointC" />
+	</bean> -->
+
+	<bean id="circle" class="com.gaurav.springmvc.Circle">
+
+	</bean>
+
+	<bean id="pointA" class="com.gaurav.springmvc.Point">
+		<qualifier value="circleRelated" />
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+
+	<bean id="pointB" class="com.gaurav.springmvc.Point">
+		<property name="x" value="-20" />
+		<property name="y" value="0" />
+	</bean>
+
+	<bean id="center" class="com.gaurav.springmvc.Point">
+		<property name="x" value="0" />
+		<property name="y" value="20" />
+	</bean>
+		
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.gaurav.springmvc"></context:component-scan>
+
+</beans>

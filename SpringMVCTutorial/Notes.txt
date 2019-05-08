@@ -1,0 +1,57 @@
+Spring MVC:
+
+Topic: Autowiring
+
+1: byName - wires by the name(id) of the bean. The id and the name of the member variable defined in the class for which the bean is created should be same.
+2: byType - wires by the class type. This works if there is only type of bean that needs to be wired. If there are multiple beans of the same class, spring would not understand which bean needs to be wired due to ambiguity.
+3: constructor - Autowire by constructor is same as autowire by type, but instead of a setter injection it does a constructor injection.
+4: default setting for autowiring is OFF 
+
+in real world applications its very hard to biforcate between dependencies Autowire may fail in huge and bulky applications.
+
+Topic: Bean Scopes
+
+Q)How does epring bean work?
+Ans) The application context refers the spring.xml at the time of initialization and initialzes all the beans. The beans are made available by the application context before even calling the getBean() method.
+This is the default behaviour of the application context.
+However the bean creation can be configured at the time getBean() call. 
+
+There are two basic bean scopes.
+1: Singleton(Default scope) - i) Only once per Spring container. 
+			  ii)No matter how many calls are made to the getBean() only instance will be returned.
+2: Prototype - i) New bean created with every request or reference.
+			   ii)New bean would returnedfor each getBean() or a reference
+Web-aware Context Bean Scopes
+1: Request - New bean per sevlet request. Same request will have the same bean.
+2: Session - New bean per session. A new bean will only be returned if it is a new user or a new session.
+3: Global Session: New bean per global HTTP session.  Applicable in the portlet context.
+
+Woring of singleton bean is different than the singleton pattern. You could have multiple spring containers runnig in the same JVM and each of those have the same object configured and thus it cannot be called as pure singleton.
+
+Topic : ApplicationContextAware
+
+ApplicationContextAware is nothing but an interface provided by spring. Any class that implements the interface can have an overidden implementation of the setApplicationContextAware() method which takes the object of application context.
+This way we can initialize beans in any class straight by calling the getBean() method instead of wiring them.
+ 
+There are other context aware interfaces as well.
+
+Topic: Bean Definition Inheritance
+Parent and child bean, doe not inherit the bean but inherits the bean definition
+Inherit list and other collections as well define parent as abstarct which be treated as a template without initializing the parent bean.
+For adding the new element in the parent bean collection type use merge
+
+Topic :  LifeCycle Callbacks
+
+There are various operation that need to be done at various stages of application. 
+Spring provides lifecycle call backs methods that can be utilized to run operations before bean initialization and after it, basically init and destroy method.
+
+Topic :  BeanPostProcessor
+The disadvantage of lifecycle callback methods is that the beans for which the method are to be configure to run have to contain the methods.
+
+BeanPostProcessor is a feature provided by spring which allows us to write methods that will be run for every bean initialization and destruction.
+This can mainly be implemented in the configuration related method calls.
+
+Topic : Event Handling in spring
+Event publisher -  The entity which publishes the event
+Event listener -  The entity which listens the event
+Event itself
